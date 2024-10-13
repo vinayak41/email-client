@@ -1,0 +1,6 @@
+.wrapper {
+  border: 1px dotted green;
+  font-size: 2rem;
+  height: calc(100% - 40px);
+  overflow-y: auto;
+}
