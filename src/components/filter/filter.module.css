@@ -1,9 +1,34 @@
 .wrapper {
-  border: 1px solid red;
-  height: 40px;
+  height: var(--header-height);
   width: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.label {
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+
+.options {
+  display: flex;
+  gap: 1rem;
 }
 
 .button {
   font-size: 1rem;
+  padding: 4px 12px;
+  border-radius: 16px;
+  outline: none;
+  border: 1px solid gray;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button.active {
+  background-color: #e1e4ea;
+  border: 1px solid var(--border-color);
 }

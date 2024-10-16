@@ -1,0 +1,51 @@
+.wrapper {
+  display: flex;
+  background-color: white;
+  border-radius: 0.4rem;
+  border: 1px solid #dadada;
+  padding: 1rem 1.5rem;
+  gap: 1.25rem;
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
+.avatar {
+  display: flex;
+  width: 2.6rem;
+  height: 2.6rem;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.wrapper > div {
+  width: calc(100% - 2.6rem - 1.25rem);
+}
+
+.shortDescription {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dateAndFavButtonWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.dateAndFavButtonWrapper > p {
+  width: 24ch;
+}
+
+.favorite {
+  color: var(--accent-color);
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+}
