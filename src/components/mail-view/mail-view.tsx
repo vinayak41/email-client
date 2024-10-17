@@ -5,7 +5,21 @@ import { useQuery } from "../../hooks/useQuery";
 import { formatTimestamp } from "../../utils/date-time";
 import BodySkeleton from "./body-skeleton";
 
-const MailView: FC<MailListItem> = ({ id, from, subject, date }) => {
+interface MailViewPropsType extends MailListItem {
+  addToFavorite: (id: string) => void;
+  removeFromFavorite: (id: string) => void;
+  isFavorite: boolean;
+}
+
+const MailView: FC<MailViewPropsType> = ({
+  id,
+  from,
+  subject,
+  date,
+  isFavorite,
+  addToFavorite,
+  removeFromFavorite,
+}) => {
   const { data, isLoading } = useQuery<{ id: string; body: string }>(
     "https://flipkart-email-mock.vercel.app/",
     { id }
@@ -20,7 +34,14 @@ const MailView: FC<MailListItem> = ({ id, from, subject, date }) => {
             <h1>{subject}</h1>
             <p>{formatTimestamp(date)}</p>
           </div>
-          <button className={styles.favoriteButton}>Mark as favorite</button>
+          <button
+            className={styles.favoriteButton}
+            onClick={() =>
+              isFavorite ? removeFromFavorite(id) : addToFavorite(id)
+            }
+          >
+            {isFavorite ? "Remove from" : "Mark as"} favorite
+          </button>
         </div>
         {isLoading && !data?.body && <BodySkeleton />}
         {data?.body && (

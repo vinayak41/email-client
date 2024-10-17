@@ -6,6 +6,7 @@ import { formatTimestamp } from "../../utils/date-time";
 interface MailListItemPropsType extends MailListItemType {
   onClick: () => void;
   selected: boolean;
+  isFavorite: boolean;
 }
 
 const MailListItem: FC<MailListItemPropsType> = ({
@@ -15,6 +16,7 @@ const MailListItem: FC<MailListItemPropsType> = ({
   short_description,
   selected = false,
   onClick,
+  isFavorite,
 }) => {
   return (
     <li
@@ -38,7 +40,7 @@ const MailListItem: FC<MailListItemPropsType> = ({
         <p className={styles.shortDescription}>{short_description}</p>
         <div className={styles.dateAndFavButtonWrapper}>
           <p>{formatTimestamp(date)} </p>{" "}
-          <button className={styles.favorite}>Favorite</button>
+          {isFavorite && <button className={styles.favorite}>Favorite</button>}
         </div>
       </div>
     </li>

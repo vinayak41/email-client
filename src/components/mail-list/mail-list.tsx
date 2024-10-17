@@ -7,9 +7,14 @@ import MailListItem from "./mail-list-item";
 type MailListPropsType = {
   onSelect: (selectedMail: MailListItemType) => void;
   selectedId?: string;
+  isEmailFavorited: (id: string) => boolean;
 };
 
-const MailList: FC<MailListPropsType> = ({ onSelect, selectedId }) => {
+const MailList: FC<MailListPropsType> = ({
+  onSelect,
+  selectedId,
+  isEmailFavorited,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const { data: listData, isLoading } = useQuery<{
@@ -42,6 +47,7 @@ const MailList: FC<MailListPropsType> = ({ onSelect, selectedId }) => {
             onClick={() => onSelect(email)}
             {...email}
             selected={selectedId === email.id}
+            isFavorite={isEmailFavorited(email.id)}
           />
         ))}
       </ul>
