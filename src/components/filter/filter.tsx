@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import styles from "./filter.module.css";
 
-const Filter = () => {
-  const [selected, setSelected] = useState<string>("Read");
+type FilterPropsType = {
+  value: string;
+  onChange: (value: string) => void;
+};
 
+const Filter: FC<FilterPropsType> = ({ value, onChange }) => {
   const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLButtonElement;
 
-    // Check if the clicked element is a button with a value
     if (target.tagName === "BUTTON" && target.value) {
-      setSelected(target.value);
+      onChange(target.value === value ? "" : target.value);
     }
   };
 
@@ -22,7 +24,7 @@ const Filter = () => {
             key={filterItm}
             value={filterItm}
             className={`${styles.button} ${
-              selected === filterItm ? styles.active : ""
+              value === filterItm ? styles.active : ""
             }`}
           >
             {filterItm}

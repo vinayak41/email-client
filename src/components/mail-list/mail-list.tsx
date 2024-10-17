@@ -9,6 +9,7 @@ type MailListPropsType = {
   selectedId?: string;
   isEmailFavorited: (id: string) => boolean;
   isEmailRead: (id: string) => boolean;
+  filter?: string;
 };
 
 const MailList: FC<MailListPropsType> = ({
@@ -16,6 +17,7 @@ const MailList: FC<MailListPropsType> = ({
   selectedId,
   isEmailFavorited,
   isEmailRead,
+  filter,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
@@ -26,6 +28,23 @@ const MailList: FC<MailListPropsType> = ({
     page: currentPage.toString(),
   });
   const listRef = useRef<HTMLUListElement | null>(null);
+
+  const filteredEmails = useMemo(
+    () =>
+      listData?.list.filter((email) => {
+        switch (filter) {
+          case "Unread":
+            return !isEmailRead(email.id);
+          case "Read":
+            return isEmailRead(email.id);
+          case "Favorites":
+            return isEmailFavorited(email.id);
+          default:
+            return true;
+        }
+      }),
+    [filter, listData?.list]
+  );
 
   const getPageSize = () => {
     if (listData && currentPage === 1 && !numberOfPages) {
@@ -44,7 +63,7 @@ const MailList: FC<MailListPropsType> = ({
       className={`${styles.wrapper} ${!selectedId ? styles.fullWidth : ""}`}
     >
       <ul ref={listRef} className={styles.list}>
-        {listData?.list.map((email) => (
+        {filteredEmails?.map((email) => (
           <MailListItem
             onClick={() => onSelect(email)}
             {...email}

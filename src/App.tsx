@@ -9,13 +9,12 @@ import useReadEmailIds from "./hooks/useReadEmails";
 
 const App = () => {
   const [selectedMail, setSelectedMail] = useState<MailListItem | null>(null);
-
+  const [filter, setFilter] = useState("");
   const {
     isFavorite: isEmailFavorited,
     addToFavorite,
     removeFromFavorite,
   } = useFavorites();
-
   const { isEmailRead, markEmailAsRead } = useReadEmailIds();
 
   useEffect(() => {
@@ -26,12 +25,13 @@ const App = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Filter />
+      <Filter value={filter} onChange={setFilter} />
       <MailList
         onSelect={setSelectedMail}
         selectedId={selectedMail?.id}
         isEmailFavorited={isEmailFavorited}
         isEmailRead={isEmailRead}
+        filter={filter}
       />
       {selectedMail && (
         <MailView
