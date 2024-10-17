@@ -3,6 +3,7 @@ import styles from "./mail-list.module.css";
 import { useQuery } from "../../hooks/useQuery";
 import { MailListItem as MailListItemType } from "../../types";
 import MailListItem from "./mail-list-item";
+import MailListSkeleton from "./mail-list-skeleton";
 
 type MailListPropsType = {
   onSelect: (selectedMail: MailListItemType) => void;
@@ -63,8 +64,11 @@ const MailList: FC<MailListPropsType> = ({
       className={`${styles.wrapper} ${!selectedId ? styles.fullWidth : ""}`}
     >
       <ul ref={listRef} className={styles.list}>
+        {isLoading && <MailListSkeleton />}
         {filteredEmails?.length === 0 && (
-          <p className={styles.noMailForFilter} >No matching emails for the selected filter.</p>
+          <p className={styles.noMailForFilter}>
+            No matching emails for the selected filter.
+          </p>
         )}
         {filteredEmails?.map((email) => (
           <MailListItem
