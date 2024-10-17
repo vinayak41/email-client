@@ -27,7 +27,11 @@ const App = () => {
     <div className={styles.wrapper}>
       <Filter value={filter} onChange={setFilter} />
       <MailList
-        onSelect={setSelectedMail}
+        onSelect={(email) =>
+          selectedMail?.id !== email.id
+            ? setSelectedMail(email)
+            : setSelectedMail(null)
+        }
         selectedId={selectedMail?.id}
         isEmailFavorited={isEmailFavorited}
         isEmailRead={isEmailRead}
