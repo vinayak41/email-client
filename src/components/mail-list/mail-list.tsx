@@ -1,10 +1,15 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./mail-list.module.css";
 import { useQuery } from "../../hooks/useQuery";
 import { MailListItem as MailListItemType } from "../../types";
 import MailListItem from "./mail-list-item";
 
-const MailList = () => {
+type MailListPropsType = {
+  onSelect: (selectedMail: MailListItemType) => void;
+  selectedId?: string;
+};
+
+const MailList: FC<MailListPropsType> = ({ onSelect, selectedId }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const { data: listData, isLoading } = useQuery<{
@@ -28,10 +33,16 @@ const MailList = () => {
   }, [currentPage]);
 
   return (
-    <aside className={styles.wrapper}>
+    <aside
+      className={`${styles.wrapper} ${!selectedId ? styles.fullWidth : ""}`}
+    >
       <ul ref={listRef} className={styles.list}>
         {listData?.list.map((email) => (
-          <MailListItem {...email} />
+          <MailListItem
+            onClick={() => onSelect(email)}
+            {...email}
+            selected={selectedId === email.id}
+          />
         ))}
       </ul>
       <div className={styles.pagination}>

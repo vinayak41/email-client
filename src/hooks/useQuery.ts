@@ -6,7 +6,7 @@ interface QueryOptions {
   headers?: HeadersInit;
 }
 
-export const useQuery = <T,>(
+export const useQuery = <T>(
   url: string,
   params?: Record<string, string>,
   options?: QueryOptions
@@ -21,16 +21,17 @@ export const useQuery = <T,>(
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
+      setData(null);
 
       // Construct the full URL with query parameters
       const queryString = memoizedParams
-        ? '?' + new URLSearchParams(memoizedParams).toString()
-        : '';
+        ? "?" + new URLSearchParams(memoizedParams).toString()
+        : "";
       const fullUrl = url + queryString;
 
       try {
         const response = await fetch(fullUrl, {
-          method: 'GET',
+          method: "GET",
           ...memoizedOptions,
         });
         if (!response.ok) throw new Error(response.statusText);

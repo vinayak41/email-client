@@ -1,6 +1,56 @@
 .wrapper {
-  border: 1px dotted green;
-  font-size: 2rem;
+  font-size: 1.1rem;
   height: calc(100% - 40px);
   overflow-y: auto;
+  padding-left: 2rem;
+  padding-right: 0.2rem;
+}
+
+.content {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding-left: 6rem;
+  padding-right: 3rem;
+  min-height: 100%;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 2rem;
+}
+
+.avatar {
+  display: flex;
+  width: 2.6rem;
+  height: 2.6rem;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: absolute;
+  left: -4rem;
+}
+
+.header h1 {
+  margin-bottom: 1rem;
+}
+
+.favoriteButton {
+  padding: 8px 16px;
+  background-color: var(--accent-color);
+  border-radius: 1.5rem;
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
 }

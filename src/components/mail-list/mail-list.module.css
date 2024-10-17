@@ -2,6 +2,11 @@
   width: 30%;
   height: calc(100% - var(--header-height));
   float: left;
+  transition: width 0.3s ease;
+}
+
+.wrapper.fullWidth {
+  width: 100%;
 }
 
 .list {
@@ -11,6 +16,7 @@
   max-width: 100%;
   height: calc(100% - 3rem);
   overflow-y: auto;
+  padding-right: 0.2rem;
 }
 
 .pagination {

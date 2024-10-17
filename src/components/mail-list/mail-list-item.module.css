@@ -7,6 +7,11 @@
   gap: 1.25rem;
   font-size: 1rem;
   line-height: 2rem;
+  cursor: pointer;
+}
+
+.wrapper.selected {
+  border: 1px solid var(--accent-color);
 }
 
 .avatar {
