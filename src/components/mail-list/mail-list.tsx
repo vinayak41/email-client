@@ -63,6 +63,9 @@ const MailList: FC<MailListPropsType> = ({
       className={`${styles.wrapper} ${!selectedId ? styles.fullWidth : ""}`}
     >
       <ul ref={listRef} className={styles.list}>
+        {filteredEmails?.length === 0 && (
+          <p className={styles.noMailForFilter} >No matching emails for the selected filter.</p>
+        )}
         {filteredEmails?.map((email) => (
           <MailListItem
             onClick={() => onSelect(email)}
