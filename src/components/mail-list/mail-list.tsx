@@ -8,12 +8,14 @@ type MailListPropsType = {
   onSelect: (selectedMail: MailListItemType) => void;
   selectedId?: string;
   isEmailFavorited: (id: string) => boolean;
+  isEmailRead: (id: string) => boolean;
 };
 
 const MailList: FC<MailListPropsType> = ({
   onSelect,
   selectedId,
   isEmailFavorited,
+  isEmailRead,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
@@ -48,6 +50,7 @@ const MailList: FC<MailListPropsType> = ({
             {...email}
             selected={selectedId === email.id}
             isFavorite={isEmailFavorited(email.id)}
+            isRead={isEmailRead(email.id)}
           />
         ))}
       </ul>

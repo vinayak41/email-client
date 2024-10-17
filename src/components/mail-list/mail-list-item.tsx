@@ -7,6 +7,7 @@ interface MailListItemPropsType extends MailListItemType {
   onClick: () => void;
   selected: boolean;
   isFavorite: boolean;
+  isRead: boolean;
 }
 
 const MailListItem: FC<MailListItemPropsType> = ({
@@ -17,11 +18,14 @@ const MailListItem: FC<MailListItemPropsType> = ({
   selected = false,
   onClick,
   isFavorite,
+  isRead,
 }) => {
   return (
     <li
       onClick={onClick}
-      className={`${styles.wrapper} ${selected ? styles.selected : ""}`}
+      className={`${styles.wrapper} ${selected ? styles.selected : ""} ${
+        !isRead ? styles.unread : ""
+      }`}
     >
       <span className={styles.avatar}>{from.name.at(0)}</span>
       <div>
